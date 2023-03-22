@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class ResponseServlet
- */
 @WebServlet("/ResponseServlet")
 public class ResponseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,7 +17,6 @@ public class ResponseServlet extends HttpServlet {
     public ResponseServlet() {
         super();
     }
-
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 요청 파라미터 처리하기
