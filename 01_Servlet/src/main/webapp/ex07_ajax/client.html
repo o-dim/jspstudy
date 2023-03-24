@@ -59,9 +59,42 @@
 				success : (resData) => {
 					$('#content2').append($('<div>').text(resData.name));
 					$('#content2').append($('<div>').text(resData.age));
+				},
+				error : (jqXHR) => {
+					$('#content2').append($('<div>').text(jqXHR.status));
+					$('#content2').append($('<div>').text(jqXHR.responseText));
 				}
 			})
 		});
+	
+	</script>
+	
+	<div>
+		<form id="frm_book">
+			<input type="text" name="title" placeholder="제목">
+			<input type="text" name="author" placeholder="작가">
+			<input type="text" name="price" placeholder="가격">
+			<input type="button" id="btn3" value="XML 요청">
+		</form>
+	</div>
+	<div id="content3"></div>
+	<script>
+		$('#btn3').on('click', function() {
+			$('#content3').empty();
+			$.ajax({
+				type : 'get',
+				url : '/01_Servlet/XMLServlet',
+				data : $('#frm_book').serialize(),
+				dataType : 'XML',
+				success : (resData) => {
+					var ul = $('<ul>');
+					ul.append($('<li>').text('제목 : ' + $(resData).find('title').text()));
+					ul.append($('<li>').text('저자 : ' + $(resData).find('author').text()));
+					ul.append($('<li>').text('가격 : ' + $(resData).find('price').text() + '원'));
+					$('#content3').append(ul);
+				}
+			})
+		})
 	
 	</script>
 </body>
