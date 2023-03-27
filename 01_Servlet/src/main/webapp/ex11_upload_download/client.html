@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../resources/js/lib/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+	<div>
+		<form id="frm_upload" action="/01_Servlet/UploadServlet" method="post" enctype="multipart/form-data">
+			<div>
+				<label for="uploader">작성자</label>
+				<input type="text" id="uploader" name="uploader">
+			</div>
+			<div>
+				<label for="filename">파일첨부</label>
+				<input type="file" id="filename" name="filename">
+			</div>
+			<div>
+				<button>첨부하기</button>
+				<input type="reset" value="다시작성">
+			</div>
+		</form>
+	</div>
+	
+	<script type="text/javascript">
+		$('#filename').on('change', function() {
+			// 확장자 제한하기
+			var filename = $(this).val(); // 첨부된 파일 이름
+			var extname = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase(); // 첨부된 파일 확장자(소문자로 변환)
+			var acceptList = ['jpg', 'jpeg', 'gif', 'tif', 'png']; // 허용할 확장자 목록
+			
+			if($.inArray(extname, acceptList) == -1){
+				alert('사용할 수 없는 확장자 입니다.');
+				$(this).val('') // 파일이 사라짐
+				return;
+			}
+			
+			// 파일 크기 제한
+			var filesize = this.files[0].size; // 첨부된 파일 크기
+			var maxsize = 1024 * 1024 * 10; // 최대크기 (10mb)
+			if(filesize > maxsize){
+				alert('첨부파일의 최대크기는 10mb입니다');
+				$(this).val('');
+				return;
+			}
+			
+		} )
+	
+	</script>
+</body>
+</html>
