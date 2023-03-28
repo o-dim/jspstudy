@@ -8,13 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<% 
 		request.setCharacterEncoding("UTF-8");
 		String model = request.getParameter("model");
 		Optional<String> opt = Optional.ofNullable(request.getParameter("price")); /* price 가 없으면 0쓰겠음 */
 		int price = Integer.parseInt(opt.orElse("0"));
-		
 	%>	
 	
 	<h1>모델 : <%=model %></h1>

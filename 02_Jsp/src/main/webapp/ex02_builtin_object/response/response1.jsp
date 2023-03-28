@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="request2.jsp?model=냉장고&price=200">이동하기</a>
+	<%
+		response.sendRedirect(request.getContextPath() + "/ex02_builtin_object/response/response2.jsp");
+	%>
 </body>
 </html>

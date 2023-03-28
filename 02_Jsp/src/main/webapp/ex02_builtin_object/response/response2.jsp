@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="request2.jsp?model=냉장고&price=200">이동하기</a>
+	<h1>Response2</h1>
 </body>
 </html>

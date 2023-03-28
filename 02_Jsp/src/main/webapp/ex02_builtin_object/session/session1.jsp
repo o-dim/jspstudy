@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="request2.jsp?model=냉장고&price=200">이동하기</a>
+<%-- sessionID는 유효아이디이자 쿠키 이름과 같거든.. 그래서 나중에 쿠키로 이용할 수 있어 --%>
+	<%
+		String sessionId = session.getId();
+		
+	%>
+	<h1><%=sessionId%></h1>
 </body>
 </html>
