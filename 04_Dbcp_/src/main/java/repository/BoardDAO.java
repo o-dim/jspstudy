@@ -171,8 +171,36 @@ public class BoardDAO {
 	
 	// 게시글 수정하기
 	public int updateBoard(BoardDTO board) {
-		return 0;
-	}
+		
+		// 1. 수정 결과 변수 선언 
+		int updateResult = 0;
+		
+		try {
+			// 2. dataSource로부터 Connection 얻어오기
+			con = dataSource.getConnection();
+			
+			// 3. 실행할쿼리문
+			sql = "UPDATE BOARD SET TITLE = ?, CONTENT = ?, MODIFIRED_DATE = SYSDATE WHERE BOARD_NO = ? ";
+			
+			// 4. 쿼리문을 실행할 PreparedStatement 객체 생성
+			ps = con.prepareStatement(sql);
+
+			// 5. 쿼리문에 변수 값 전달하기
+			ps.setString(1, board.getTitle());   // 1번째 물음표(?)에 board_no 전달하기
+			ps.setString(2, board.getContent());   // 2번째 물음표(?)에 content 전달하기
+			ps.setInt(3, board.getBoard_no());   // 3번째 물음표(?)에 board_no 전달하기
+			
+			// 6. PreparedStatment 객체를 이용해서 쿼리문 실행 (DELETE문 실행은 executeUpadate 메소드로 한다)
+			updateResult = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		// 7. 반환
+		return updateResult;
+		
+	} 
 	
 	// 게시글 삭제하기
 	public int deleteBoard(int board_no) {
