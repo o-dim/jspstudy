@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace는 mybatis.mapper.bbs.xml 파일을 의미한다 -->
+<mapper namespace="mybatis.mapper.student">
+	<!--  목록 -->
+	<select id="selectAllStuList" resultType="Stu">
+		SELECT STU_NO, NAME, KOR, ENG, MATH, VAE, GRADE
+		  FROM STUDENT
+		 ORDER BY STU_NO DESC
+	</select>
+	<!--  상세  -->
+	<select id="selectStuByNo" parameterType="int" resultType="Stu">
+		SELECT STU_NO, NAME, KOR, ENG, MATH, AVE, GRADE
+		  FROM STUDENT
+		 WHERE STU_NO = #{stuNo}
+	</select>
+	
+	<!--  삽입 (번호는 부여되는 거겠지?) -->
+	<insert id="insertStu" parameterType="Bbs" >
+		INSERT INTO STUDENT
+			(STU_NO, NAME, KOR, ENG, MATH)
+		VALUES
+			(STUDENT_SEQ.NEXTVAL, #{name}, #{kor}, ${eng}, ${math})
+	</insert>
+	
+	<!--  수정  -->
+	<update id="updateStu" parameterType="Stu">
+		UPDATE STUDENT
+		   SET NAME = #{name}
+		     , KOR = #{kor}
+		     , ENG = #{eng}
+		     , MATH = #{math}
+		 WHERE STU_NO = #{stuNo} 
+	</update>
+	
+	<!--  삭제  -->
+	<delete id="deleteStu" parameterType="int">
+		DELETE
+		  FROM STUDENT
+		 WHERE STU_NO = #{stuNo}
+	</delete>
+	
+	<!-- 탑3 가져오기 -->
+	<select id="selectTop3Stu" resultType="Stu">
+		SELECT NAME, AVE
+		  FROM STUDENT
+		 WHERE STU_NO = #{stuNo}
+	</select>
+</mapper>
